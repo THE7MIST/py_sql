@@ -1,0 +1,301 @@
+
+# SIMPLE QUESTION 1 — Student Table
+
+### Scenario: Basic student database
+
+### Tasks:
+
+1. Create database school_db
+Create database school_db;
+
+2. Use the database
+use database school_db;
+
+
+3. Create table students with:
+
+   * id (PRIMARY KEY)
+   * name (NOT NULL)
+   * marks (CHECK marks > 0)
+   * city (DEFAULT 'Pune')
+
+
+create table student (id int primary key, name varchar(50) not null ,marks float check (marks>0), city varchar(30) default "pune");
+
+
+
+MariaDB [school_db]> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | NO   | PRI | NULL    |       |
+| name  | varchar(50) | NO   |     | NULL    |       |
+| marks | float       | YES  |     | NULL    |       |
+| city  | varchar(30) | YES  |     | pune    |       |
++-------+-------------+------+-----+---------+-------+
+
+
+4. Insert at least 5 students
+insert into student values (3,"asharay",67.56,"chandrapur"), (4,"sdhj",56,"mumbai"), (5,"sdj",95.6,"hi");
+Query OK, 3 rows affected (0.002 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [school_db]> select * from student;
++----+----------+-------+------------+
+| id | name     | marks | city       |
++----+----------+-------+------------+
+|  1 | Abhishek | 68.56 | pune       |
+|  2 | khem     | 98.56 | chatisgdh  |
+|  3 | asharay  | 67.56 | chandrapur |
+|  4 | sdhj     |    56 | mumbai     |
+|  5 | sdj      |  95.6 | hi         |
++----+----------+-------+------------+
+
+
+
+5. Perform:
+
+   * Update marks of one student
+
+MariaDB [school_db]> update student set marks=45.6 where id=4;
+
+MariaDB [school_db]> select * from student;
++----+----------+-------+------------+
+| id | name     | marks | city       |
++----+----------+-------+------------+
+|  1 | Abhishek | 68.56 | pune       |
+|  2 | khem     | 98.56 | chatisgdh  |
+|  3 | asharay  | 67.56 | chandrapur |
+|  4 | sdhj     |  45.6 | mumbai     |
+|  5 | sdj      |  95.6 | hi         |
++----+----------+-------+------------+
+
+   * Delete one student
+
+MariaDB [school_db]> delete from student where id=4;
+
+MariaDB [school_db]> select * from student;
++----+----------+-------+------------+
+| id | name     | marks | city       |
++----+----------+-------+------------+
+|  1 | Abhishek | 68.56 | pune       |
+|  2 | khem     | 98.56 | chatisgdh  |
+|  3 | asharay  | 67.56 | chandrapur |
+|  5 | sdj      |  95.6 | hi         |
++----+----------+-------+------------+
+
+
+
+
+6. Queries:
+
+   * Select all students
+MariaDB [school_db]> select * from student
+    -> ;
++----+----------+-------+------------+
+| id | name     | marks | city       |
++----+----------+-------+------------+
+|  1 | Abhishek | 68.56 | pune       |
+|  2 | khem     | 98.56 | chatisgdh  |
+|  3 | asharay  | 67.56 | chandrapur |
+|  5 | sdj      |  95.6 | hi         |
++----+----------+-------+------------+
+   
+   * Select students with marks > 80
+
+MariaDB [school_db]> select name from student where marks>80;
++------+
+| name |
++------+
+| khem |
+| sdj  |
++------+
+
+
+   * Select students from 'Pune'
+
+MariaDB [school_db]> select name from student where city="pune";
++----------+
+| name     |
++----------+
+| Abhishek |
++----------+
+1 row in set (0.001 sec)
+
+
+
+7. Use operators:
+
+   * marks BETWEEN 50 AND 90
+   * city IN ('Pune','Mumbai')
+
+8. Use:
+
+   * ORDER BY marks DESC
+   * LIMIT 3
+
+9. Use aggregate functions:
+
+   * MAX marks
+   * AVG marks
+   * COUNT students
+
+10. Modify table:
+
+* Add column grade
+* Rename table to college_students
+* Truncate table
+* Drop table
+
+
+
+---------------------------------------
+
+# 🟢 SIMPLE QUESTION 2 — Product Table
+
+### 🎯 Scenario: Store inventory
+
+### Tasks:
+
+1. Create database store_db
+
+2. Create table products:
+
+   * pid (PRIMARY KEY)
+   * pname (NOT NULL)
+   * price (CHECK price > 0)
+   * category (DEFAULT 'General')
+
+3. Insert 5 products
+
+4. Perform:
+
+   * Update price
+   * Delete one product
+
+5. Queries:
+
+   * price > 100
+   * price < 500
+   * category = 'General'
+
+6. Use operators:
+
+   * price BETWEEN 100 AND 1000
+   * pname LIKE 'A%'
+
+7. Sorting & limiting:
+
+   * ORDER BY price ASC
+   * LIMIT 2
+
+8. Aggregates:
+
+   * SUM(price)
+   * MIN(price)
+   * COUNT(*)
+
+9. Table changes:
+
+   * Add column stock
+   * Rename table to inventory
+   * Truncate
+   * Drop
+
+---
+
+
+### Scenario: Student Performance System
+
+
+## Part 1 — Setup
+
+1. Create database college_db
+2. Create table students:
+
+   * id (PRIMARY KEY)
+   * name (NOT NULL)
+   * marks (CHECK marks >= 0)
+   * city (DEFAULT 'Delhi')
+
+---
+
+##  Part 2 — Data Operations
+
+3. Insert at least 6 records
+
+4. Perform:
+
+   * Update marks of 2 students
+   * Delete students with marks < 40
+
+---
+
+## Part 3 — Query Practice
+
+5. Basic queries:
+
+   * Select all
+   * Select name, marks only
+
+6. Conditions:
+
+   * marks > 70 AND city = 'Delhi'
+   * marks < 50 OR city = 'Mumbai'
+   * NOT city = 'Pune'
+
+---
+
+## Part 4 — Advanced Filtering
+
+7. Use:
+
+   * marks BETWEEN 60 AND 90
+   * city IN ('Delhi','Mumbai')
+   * name LIKE 'A%'
+
+---
+
+##  Part 5 — Sorting & Limiting
+
+8. Sort:
+
+   * ORDER BY marks DESC
+   * ORDER BY name ASC
+
+9. Limit:
+
+   * Top 3 students
+
+---
+
+## Part 6 — Aggregates
+
+10. Find:
+
+* MAX marks
+* MIN marks
+* AVG marks
+* COUNT students
+
+---
+
+##  Part 7 — Table Modification
+
+11. ALTER:
+
+* Add column grade
+* Modify datatype of marks
+* Rename column name → student_name
+
+12. Rename table → student_data
+
+---
+
+##  Part 8 — Final Operations
+
+13. TRUNCATE table
+14. DROP table
+15. DROP database
+
+

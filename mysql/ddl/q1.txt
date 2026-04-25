@@ -129,10 +129,22 @@ MariaDB [school_db]> select name from student where city="pune";
    * marks BETWEEN 50 AND 90
    * city IN ('Pune','Mumbai')
 
+MariaDB [school_db]> select * from student where marks >= 50 and marks<=90 and city in("Pune","Mumbai");
++----+----------+-------+------+
+| id | name     | marks | city |
++----+----------+-------+------+
+|  1 | Abhishek | 68.56 | pune |
++----+----------+-------+------+
+
+
+
 8. Use:
 
    * ORDER BY marks DESC
    * LIMIT 3
+
+SELECT * FROM student order by marks Desc limit 3;
+
 
 9. Use aggregate functions:
 
@@ -140,162 +152,26 @@ MariaDB [school_db]> select name from student where city="pune";
    * AVG marks
    * COUNT students
 
+SELECT 
+    MAX(marks) AS max_marks,
+    AVG(marks) AS avg_marks,
+    COUNT(*) AS total_students
+FROM students;
+
 10. Modify table:
 
 * Add column grade
+ALTER TABLE students
+ADD COLUMN grade VARCHAR(10);
+
 * Rename table to college_students
+
+ALTER TABLE students
+ADD COLUMN grade VARCHAR(10);
+
 * Truncate table
+TRUNCATE TABLE college_students;
+
 * Drop table
-
-
-
----------------------------------------
-
-# 🟢 SIMPLE QUESTION 2 — Product Table
-
-### 🎯 Scenario: Store inventory
-
-### Tasks:
-
-1. Create database store_db
-
-2. Create table products:
-
-   * pid (PRIMARY KEY)
-   * pname (NOT NULL)
-   * price (CHECK price > 0)
-   * category (DEFAULT 'General')
-
-3. Insert 5 products
-
-4. Perform:
-
-   * Update price
-   * Delete one product
-
-5. Queries:
-
-   * price > 100
-   * price < 500
-   * category = 'General'
-
-6. Use operators:
-
-   * price BETWEEN 100 AND 1000
-   * pname LIKE 'A%'
-
-7. Sorting & limiting:
-
-   * ORDER BY price ASC
-   * LIMIT 2
-
-8. Aggregates:
-
-   * SUM(price)
-   * MIN(price)
-   * COUNT(*)
-
-9. Table changes:
-
-   * Add column stock
-   * Rename table to inventory
-   * Truncate
-   * Drop
-
----
-
-
-### Scenario: Student Performance System
-
-
-## Part 1 — Setup
-
-1. Create database college_db
-2. Create table students:
-
-   * id (PRIMARY KEY)
-   * name (NOT NULL)
-   * marks (CHECK marks >= 0)
-   * city (DEFAULT 'Delhi')
-
----
-
-##  Part 2 — Data Operations
-
-3. Insert at least 6 records
-
-4. Perform:
-
-   * Update marks of 2 students
-   * Delete students with marks < 40
-
----
-
-## Part 3 — Query Practice
-
-5. Basic queries:
-
-   * Select all
-   * Select name, marks only
-
-6. Conditions:
-
-   * marks > 70 AND city = 'Delhi'
-   * marks < 50 OR city = 'Mumbai'
-   * NOT city = 'Pune'
-
----
-
-## Part 4 — Advanced Filtering
-
-7. Use:
-
-   * marks BETWEEN 60 AND 90
-   * city IN ('Delhi','Mumbai')
-   * name LIKE 'A%'
-
----
-
-##  Part 5 — Sorting & Limiting
-
-8. Sort:
-
-   * ORDER BY marks DESC
-   * ORDER BY name ASC
-
-9. Limit:
-
-   * Top 3 students
-
----
-
-## Part 6 — Aggregates
-
-10. Find:
-
-* MAX marks
-* MIN marks
-* AVG marks
-* COUNT students
-
----
-
-##  Part 7 — Table Modification
-
-11. ALTER:
-
-* Add column grade
-* Modify datatype of marks
-* Rename column name → student_name
-
-12. Rename table → student_data
-
----
-
-##  Part 8 — Final Operations
-
-13. TRUNCATE table
-14. DROP table
-15. DROP database
 
 

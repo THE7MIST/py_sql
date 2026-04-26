@@ -1,0 +1,15 @@
+Create class Employee to store eid,ename,salary and bonus (bonus is 10% of salary), in the class add constructor, setter
+and getter methods, also add calculateSal method to calculate net salary using formula salary+DA+HRA-PF
+DA-10%ofsalary
+HRA15%ofsalary
+PF0.08% of salary
+Create a list emplst=[]
+Display following menu
+1. Addnewemployee
+2. Display all employee
+3. Exit
+If user selects option 1, then accept employee details create an object of employee and store it in the list
+If user selects option 2, then display all employee details
+If user selects option 3, then store employee details in empdata.txt file in colon separated format for example
+101:Rashmi:23456:2346
+102:Sharmila:34242:3456

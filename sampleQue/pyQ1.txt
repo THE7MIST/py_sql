@@ -1,0 +1,73 @@
+# ## Inventory Dictionary Program
+
+# Item names with quantity and price are stored in an inventory dictionary:
+
+# ```python
+# inventory = {
+#     "Laptop": (10, 45000),
+#     "Mouse": (85, 350),
+#     "Keyboard": (40, 750),
+#     "Monitor": (6, 12000)
+# }
+# ```
+# In the given tuples:
+# * First value represents **quantity**
+# * Second value represents **price per unit**
+
+#------------------------------------------------------------------
+
+# QQQQ a) Print all item names along with their quantity and price.
+
+
+
+#------------------------------------------------------------------
+# b) Calculate and print the stock value of each item using:
+# `stock_value = quantity × price`
+# Also print the **total stock value** of all items.
+
+
+#------------------------------------------------------------------
+# c) Accept an item name and new quantity from the user.
+
+# * If the item exists, update its quantity.
+# * Otherwise, print **"Item not found"**.
+
+
+#------------------------------------------------------------------
+# d) Write a function `get_stock_status(quantity)` which accepts quantity as a parameter and returns:
+
+# * If quantity is less than 8 → `"Critical Stock"`
+# * If quantity is between 8 and 20 → `"Low Stock"`
+# * If quantity is between 21 and 50 → `"Adequate Stock"`
+# * If quantity is greater than 50 → `"High Stock"`
+
+# Use this function to display the stock status for each item.
+
+
+
+# e) Save the final inventory report in a file named `store_report.txt`.
+# Then print:
+
+# * The number of **lines**
+# * The number of **words** present in the file
+
+# Also use a **regular expression** to check whether an item name contains only letters and spaces.
+
+# ---
+
+# ### Example Input:
+
+# Item name: Monitor
+# New quantity: 15
+
+# ### Example Output:
+
+# Monitor => Quantity: 15, Price: 12000
+
+# ### Possible Report Output:
+
+# Laptop   Stock Value = ...
+# Mouse    Stock Value = ...
+# Keyboard Stock Value = ...
+# Monitor  Stock Value = ...
+# Total Stock Value = ...

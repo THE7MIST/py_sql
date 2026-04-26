@@ -1,0 +1,168 @@
+-- =========================================================
+    SQL PRACTICE FILE (4 ADVANCED SETS)
+-- Covers: JOINS, WHERE, GROUP BY, HAVING, LIKE, REGEXP,
+-- IN, NOT IN, EXISTS, SUBQUERIES, CONSTRAINTS
+-- =========================================================
+
+
+-- =========================================================
+-- 🧾 SET 1: FinTech Transaction System
+-- =========================================================
+
+-- a) Create Database: FinTechDB
+
+-- Tables:
+-- Users(user_id PK, user_name, email UNIQUE, city, risk_level CHECK)
+-- Accounts(account_id PK, user_id FK, account_type CHECK, balance >=0)
+-- Transactions(txn_id PK, account_id FK, txn_type CHECK, amount >0, txn_date, status CHECK)
+-- FraudFlags(flag_id PK, txn_id FK, flag_reason, severity 1–5)
+
+-- b) Insert Data Requirements:
+-- - 6–8 users (different cities)
+-- - At least 1 user with NO account
+-- - 6–8 accounts (some users multiple)
+-- - At least 1 account with NO transactions
+-- - 10–12 transactions (different months, mixed status)
+-- - Some transactions flagged (severity 3–5)
+
+-- c) Perform Queries:
+-- 1. Transactions > 10000 (DESC)
+-- 2. Users email REGEXP (start letter, gmail.com)
+-- 3. INNER JOIN user + account (city IN Mumbai, Delhi)
+-- 4. LEFT JOIN users with accounts (include no account)
+-- 5. RIGHT JOIN accounts with users (include orphan)
+-- 6. Total txn per user HAVING >20000
+-- 7. Users >2 transactions in same month
+-- 8. Transactions > avg amount (subquery)
+-- 9. Accounts with NO transactions (NOT IN / EXISTS)
+-- 10. Fraud severity >=3
+-- 11. Name pattern (LIKE + REGEXP)
+-- 12. Users with ONLY successful txns
+-- 13. Account summary HAVING avg >5000
+-- 14. Top 3 users by txn
+-- 15. Pending txns last 30 days
+
+
+
+-- =========================================================
+-- 🚀 SET 2: Smart University System
+-- =========================================================
+
+-- a) Create Database: SmartUniDB
+
+-- Tables:
+-- Students(student_id PK, student_name, email UNIQUE, city)
+-- Courses(course_id PK, course_name, credits CHECK 1–5, department)
+-- Enrollments(enrollment_id PK, student_id FK, course_id FK, enroll_date, grade CHECK)
+-- Faculty(faculty_id PK, faculty_name, department)
+-- Teaching(teach_id PK, faculty_id FK, course_id FK)
+
+-- b) Insert Data Requirements:
+-- - 6–8 students (different cities)
+-- - 1 student with NO enrollment
+-- - 6 courses
+-- - 1 course with NO students
+-- - 10 enrollments (grades + months)
+-- - 4–5 faculty (multi-course teaching)
+
+-- c) Perform Queries:
+-- 1. Courses credits BETWEEN 2–4
+-- 2. Students email REGEXP (.edu)
+-- 3. INNER JOIN student + course
+-- 4. LEFT JOIN all students
+-- 5. RIGHT JOIN all courses
+-- 6. Department summary HAVING avg >2
+-- 7. Students >1 course
+-- 8. Students NOT enrolled
+-- 9. Courses with NO students
+-- 10. Total credits per student
+-- 11. Credits > avg (subquery)
+-- 12. Name pattern (LIKE + REGEXP)
+-- 13. Faculty >1 course
+-- 14. Faculty count HAVING >1
+-- 15. Students only A/B grades
+-- 16. Enrollments current/previous month
+-- 17. Highest grade per course
+-- 18. Top 5 students by credits
+
+
+
+-- =========================================================
+-- ⚡ SET 3: E-Commerce Advanced System
+-- =========================================================
+
+-- a) Create Database: EcommerceDB
+
+-- Tables:
+-- Customers(customer_id PK, name, email UNIQUE, city)
+-- Products(product_id PK, product_name, category, price >0, stock)
+-- Orders(order_id PK, customer_id FK, order_date, total_amount)
+-- OrderItems(order_item_id PK, order_id FK, product_id FK, quantity >0)
+
+-- b) Insert Data Requirements:
+-- - 6 customers
+-- - 1 customer with NO orders
+-- - 6 products
+-- - 1 product never ordered
+-- - 8–10 orders
+-- - Multiple items per order
+
+-- c) Perform Queries:
+-- 1. Products >500 (DESC)
+-- 2. Customers city IN
+-- 3. Product name pattern
+-- 4. INNER JOIN orders
+-- 5. LEFT JOIN customers
+-- 6. RIGHT JOIN products
+-- 7. Total quantity per product
+-- 8. Customers >1 order
+-- 9. Category summary HAVING avg >300
+-- 10. Products never ordered
+-- 11. Orders > avg (subquery)
+-- 12. UPPER/lower formatting
+-- 13. Orders last 2 months
+-- 14. Top 3 products
+-- 15. Customers buying all category products
+
+
+
+-- =========================================================
+-- 🧠 SET 4: Hospital Analytics System
+-- =========================================================
+
+-- a) Create Database: HospitalDB
+
+-- Tables:
+-- Patients(patient_id PK, name, city, age >0)
+-- Doctors(doctor_id PK, name, specialization)
+-- Treatments(treatment_id PK, patient_id FK, doctor_id FK, treatment_date, cost >0, status CHECK)
+-- Medicines(medicine_id PK, name, type, price >0)
+
+-- b) Insert Data Requirements:
+-- - 6 patients
+-- - 1 patient with NO treatment
+-- - 4 doctors
+-- - 8 treatments (mixed status)
+-- - Mixed cost values
+
+-- c) Perform Queries:
+-- 1. Treatments >5000
+-- 2. Patients city LIKE 'P%'
+-- 3. INNER JOIN patient + doctor
+-- 4. LEFT JOIN patients
+-- 5. RIGHT JOIN doctors
+-- 6. Cost per patient HAVING >10000
+-- 7. Patients >1 treatment
+-- 8. Patients with NO treatment
+-- 9. Treatments > avg cost
+-- 10. Doctors with most patients
+-- 11. Name pattern LIKE + REGEXP
+-- 12. Treatments last month
+-- 13. Status count GROUP BY
+-- 14. Top 3 costly treatments
+-- 15. Patients treated by all doctors
+
+
+-- =========================================================
+-- ✅ END OF FILE
+-- =========================================================

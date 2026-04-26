@@ -1,0 +1,99 @@
+*sql Q1*
+
+
+
+-- =========================================
+-- DATABASE QUESTION (ONLY QUESTIONS + DATA)
+-- =========================================
+
+-- Q1. Write queries for the following database:
+-- Create the tables, populate the data and write queries as per instructions.
+
+-- =========================================
+-- TABLE STRUCTURE
+-- =========================================
+
+-- Table: Staff
+-- Columns:
+-- staff_id (INT) – primary key
+-- staff_name (VARCHAR(50))
+-- department (VARCHAR(30))
+
+-- Table: Medicines
+-- Columns:
+-- medicine_id (INT) – primary key
+-- medicine_name (VARCHAR(50))
+-- category (VARCHAR(30))
+-- price (DECIMAL(10,2))  → price must be > 0
+
+-- Table: Prescriptions
+-- Columns:
+-- prescription_id (INT) – primary key
+-- staff_id (INT) – foreign key references Staff(staff_id)
+-- medicine_id (INT) – foreign key references Medicines(medicine_id)
+-- prescribed_date (DATE)
+-- status (VARCHAR(20)) → only 'Dispensed' or 'Pending'
+
+-- =========================================
+-- INSERT DATA (GIVEN IN QUESTION)
+-- =========================================
+
+-- Staff Data
+INSERT INTO Staff VALUES
+(1, 'Aryan Mehta', 'Cardiology'),
+(2, 'Neha Sharma', 'Neurology'),
+(3, 'Rohit Verma', 'Orthopedics'),
+(4, 'Simran Kaur', 'Cardiology');
+
+-- Medicines Data
+INSERT INTO Medicines VALUES
+(201, 'Aspirin', 'Painkiller', 250.00),
+(202, 'Paracetamol', 'Painkiller', 150.00),
+(203, 'Amoxicillin', 'Antibiotic', 300.00),
+(204, 'Azithromycin', 'Antibiotic', 220.00),
+(205, 'Cetirizine', 'Allergy', 180.00);
+
+-- Prescriptions Data
+INSERT INTO Prescriptions VALUES
+(3001, 1, 201, '2025-09-10', 'Dispensed'),
+(3002, 2, 203, '2025-11-15', 'Pending'),
+(3003, 1, 202, '2025-09-20', 'Dispensed'),
+(3004, 3, 204, '2025-10-05', 'Pending'),
+(3005, 4, 205, '2025-09-14', 'Dispensed'),
+(3006, 3, 201, '2025-11-25', 'Dispensed');
+
+-- =========================================
+-- QUESTIONS
+-- =========================================
+
+-- a) Create the database and the three tables with proper primary key,
+--    foreign key and check constraints.
+
+-- b) Insert the above records into all three tables.
+
+-- c) Write queries for the following:
+
+--    Base:
+--    Show all medicines with price greater than 200,
+--    sorted by price in descending order.
+
+--    1. Display the names of staff members who belong to the Cardiology department.
+
+--    2. Show staff name, medicine name, prescribed date for all prescriptions
+--       with status 'Pending'.
+
+--    3. Display all medicine names that were prescribed either in
+--       November or September.
+
+--    4. Write a query to display:
+--       prescription_id, staff_name, medicine_name, prescribed_date and status.
+
+--    5. Show the number of medicines, minimum price, maximum price
+--       in each category where medicine_name contains the string 'in'.
+--       Show only categories with more than 1 medicine.
+
+--    6. Display all staff members to whom no prescription is issued.
+
+-- =========================================
+-- END OF QUESTION FILE
+-- =========================================

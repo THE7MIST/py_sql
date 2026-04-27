@@ -1,0 +1,308 @@
+*sql Q1*
+
+
+
+-- =========================================
+-- DATABASE QUESTION (ONLY QUESTIONS + DATA)
+-- =========================================
+
+-- Q1. Write queries for the following database:
+-- Create the tables, populate the data and write queries as per instructions.
+
+-- =========================================
+-- TABLE STRUCTURE
+-- =========================================
+
+-- Table: Staff
+-- Columns:
+-- staff_id (INT) – primary key
+-- staff_name (VARCHAR(50))
+-- department (VARCHAR(30))
+
+create table Staff
+(
+staff_id int primary key,
+satff_name varchar(50),
+department varchar(30)
+);
+
+desc Staff;
+MariaDB [sqlque]> desc Staff;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| staff_id   | int(11)     | NO   | PRI | NULL    |       |
+| satff_name | varchar(50) | YES  |     | NULL    |       |
+| department | varchar(30) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+
+
+-- Table: Medicines
+-- Columns:
+-- medicine_id (INT) – primary key
+-- medicine_name (VARCHAR(50))
+-- category (VARCHAR(30))
+-- price (DECIMAL(10,2))  → price must be > 0
+
+create table Medicines
+(
+medicine_id int primary key,
+medicine_name varchar(50),
+category varchar(30),
+price decimal(10,2) check (price>0)
+);
+
+desc Medicines;
+
+MariaDB [sqlque]> desc Medicines;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| medicine_id   | int(11)       | NO   | PRI | NULL    |       |
+| medicine_name | varchar(50)   | YES  |     | NULL    |       |
+| category      | varchar(30)   | YES  |     | NULL    |       |
+| price         | decimal(10,2) | YES  |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+
+-- Table: Prescriptions
+-- Columns:
+-- prescription_id (INT) – primary key
+-- staff_id (INT) – foreign key references Staff(staff_id)
+-- medicine_id (INT) – foreign key references Medicines(medicine_id)
+-- prescribed_date (DATE)
+-- status (VARCHAR(20)) → only 'Dispensed' or 'Pending'
+
+
+create table Prescriptions
+(
+Prescriptions_id int primary key,
+staff_id int,
+medicine_id int,
+prescribed_date date,
+status varchar(20),
+
+foreign key (staff_id) references Staff(staff_id),
+foreign key (medicine_id) references Medicines(medicine_id),
+
+ check (status in ("Dispensed","Pending"))
+);
+
+desc Prescriptions;
+MariaDB [sqlque]> desc Prescriptions;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| Prescriptions_id | int(11)     | NO   | PRI | NULL    |       |
+| staff_id         | int(11)     | YES  | MUL | NULL    |       |
+| medicine_id      | int(11)     | YES  | MUL | NULL    |       |
+| prescribed_date  | date        | YES  |     | NULL    |       |
+| status           | varchar(20) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+
+
+-- =========================================
+-- INSERT DATA (GIVEN IN QUESTION)
+-- =========================================
+
+-- Staff Data;
+INSERT INTO Staff VALUES
+(1, 'Aryan Mehta', 'Cardiology'),
+(2, 'Neha Sharma', 'Neurology'),
+(3, 'Rohit Verma', 'Orthopedics'),
+(4, 'Simran Kaur', 'Cardiology');
+
+select * from Staff;
++----------+-------------+-------------+
+| staff_id | satff_name  | department  |
++----------+-------------+-------------+
+|        1 | Aryan Mehta | Cardiology  |
+|        2 | Neha Sharma | Neurology   |
+|        3 | Rohit Verma | Orthopedics |
+|        4 | Simran Kaur | Cardiology  |
++----------+-------------+-------------+
+
+
+-- Medicines Data;
+INSERT INTO Medicines VALUES
+(201, 'Aspirin', 'Painkiller', 250.00),
+(202, 'Paracetamol', 'Painkiller', 150.00),
+(203, 'Amoxicillin', 'Antibiotic', 300.00),
+(204, 'Azithromycin', 'Antibiotic', 220.00),
+(205, 'Cetirizine', 'Allergy', 180.00);
+
+select * from Medicines;
++-------------+---------------+------------+--------+
+| medicine_id | medicine_name | category   | price  |
++-------------+---------------+------------+--------+
+|         201 | Aspirin       | Painkiller | 250.00 |
+|         202 | Paracetamol   | Painkiller | 150.00 |
+|         203 | Amoxicillin   | Antibiotic | 300.00 |
+|         204 | Azithromycin  | Antibiotic | 220.00 |
+|         205 | Cetirizine    | Allergy    | 180.00 |
++-------------+---------------+------------+--------+
+
+
+
+-- Prescriptions Data;
+INSERT INTO Prescriptions VALUES
+(3001, 1, 201, '2025-09-10', 'Dispensed'),
+(3002, 2, 203, '2025-11-15', 'Pending'),
+(3003, 1, 202, '2025-09-20', 'Dispensed'),
+(3004, 3, 204, '2025-10-05', 'Pending'),
+(3005, 4, 205, '2025-09-14', 'Dispensed'),
+(3006, 3, 201, '2025-11-25', 'Dispensed');
+
+select * from Prescriptions;
+
++------------------+----------+-------------+-----------------+-----------+
+| Prescriptions_id | staff_id | medicine_id | prescribed_date | status    |
++------------------+----------+-------------+-----------------+-----------+
+|             3001 |        1 |         201 | 2025-09-10      | Dispensed |
+|             3002 |        2 |         203 | 2025-11-15      | Pending   |
+|             3003 |        1 |         202 | 2025-09-20      | Dispensed |
+|             3004 |        3 |         204 | 2025-10-05      | Pending   |
+|             3005 |        4 |         205 | 2025-09-14      | Dispensed |
+|             3006 |        3 |         201 | 2025-11-25      | Dispensed |
++------------------+----------+-------------+-----------------+-----------+
+
+
+-- =========================================
+-- QUESTIONS
+-- =========================================
+
+-- a) Create the database and the three tables with proper primary key,
+--    foreign key and check constraints.
+
+-- b) Insert the above records into all three tables.
+
+-- c) Write queries for the following:
+
+--    Base:
+--    Show all medicines with price greater than 200,
+--    sorted by price in descending order.
+
+select * from Medicines
+where price > 200
+order by price desc;
++-------------+---------------+------------+--------+
+| medicine_id | medicine_name | category   | price  |
++-------------+---------------+------------+--------+
+|         203 | Amoxicillin   | Antibiotic | 300.00 |
+|         201 | Aspirin       | Painkiller | 250.00 |
+|         204 | Azithromycin  | Antibiotic | 220.00 |
++-------------+---------------+------------+--------+
+
+
+--    1. Display the names of staff members who belong to the Cardiology department.
+select * from Staff
+where  (department = 'Cardiology');
+
++----------+-------------+------------+
+| staff_id | satff_name  | department |
++----------+-------------+------------+
+|        1 | Aryan Mehta | Cardiology |
+|        4 | Simran Kaur | Cardiology |
++----------+-------------+------------+
+
+
+--    2. Show staff name, medicine name, prescribed date for all prescriptions
+--       with status 'Pending'.
+
+
+SELECT 
+    s.satff_name,
+    m.medicine_name,
+    p.prescribed_date
+FROM Prescriptions p
+JOIN Staff s ON p.staff_id = s.staff_id
+JOIN Medicines m ON p.medicine_id = m.medicine_id
+WHERE p.status = 'Pending';
+
++-------------+---------------+-----------------+
+| satff_name  | medicine_name | prescribed_date |
++-------------+---------------+-----------------+
+| Neha Sharma | Amoxicillin   | 2025-11-15      |
+| Rohit Verma | Azithromycin  | 2025-10-05      |
++-------------+---------------+-----------------+
+
+
+
+--    3. Display all medicine names that were prescribed either in
+--       November or September.
+
+select
+m.medicine_name
+from Prescriptions p
+join Medicines m on p.medicine_id=m.medicine_id
+where Month( p.prescribed_date) in (9,11);
+
++---------------+
+| medicine_name |
++---------------+
+| Aspirin       |
+| Amoxicillin   |
+| Paracetamol   |
+| Cetirizine    |
+| Aspirin       |
++---------------+
+
+
+--    4. Write a query to display:
+--       prescription_id, staff_name, medicine_name, prescribed_date and status.
+SELECT 
+    p.Prescriptions_id,
+    s.satff_name,
+    m.medicine_name,
+    p.prescribed_date,
+    p.status
+FROM Prescriptions p
+JOIN Staff s ON p.staff_id = s.staff_id
+JOIN Medicines m ON p.medicine_id = m.medicine_id;
+
++------------------+-------------+---------------+-----------------+-----------+
+| Prescriptions_id | satff_name  | medicine_name | prescribed_date | status    |
++------------------+-------------+---------------+-----------------+-----------+
+|             3001 | Aryan Mehta | Aspirin       | 2025-09-10      | Dispensed |
+|             3002 | Neha Sharma | Amoxicillin   | 2025-11-15      | Pending   |
+|             3003 | Aryan Mehta | Paracetamol   | 2025-09-20      | Dispensed |
+|             3004 | Rohit Verma | Azithromycin  | 2025-10-05      | Pending   |
+|             3005 | Simran Kaur | Cetirizine    | 2025-09-14      | Dispensed |
+|             3006 | Rohit Verma | Aspirin       | 2025-11-25      | Dispensed |
++------------------+-------------+---------------+-----------------+-----------+
+
+
+--    5. Show the number of medicines, minimum price, maximum price
+--       in each category where medicine_name contains the string 'in'.
+--       Show only categories with more than 1 medicine.
+
+SELECT 
+    category,
+    COUNT(*) AS total_medicines,
+    MIN(price) AS min_price,
+    MAX(price) AS max_price
+FROM Medicines
+WHERE medicine_name LIKE '%in%'
+GROUP BY category
+HAVING COUNT(*) > 1;
+
++------------+-----------------+-----------+-----------+
+| category   | total_medicines | min_price | max_price |
++------------+-----------------+-----------+-----------+
+| Antibiotic |               2 |    220.00 |    300.00 |
++------------+-----------------+-----------+-----------+
+
+
+--    6. Display all staff members to whom no prescription is issued.
+
+SELECT 
+    s.satff_name
+FROM Staff s
+LEFT JOIN Prescriptions p 
+    ON s.staff_id = p.staff_id
+WHERE p.staff_id IS NULL;
+
+empty set
+-- =========================================
+-- END OF QUESTION FILE
+-- =========================================

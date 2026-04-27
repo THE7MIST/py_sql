@@ -20,7 +20,8 @@
 
 
 
-#------------------------------------------------------------------
+#------------------------------------------------------------------+-
+
 # b) Calculate and print the stock value of each item using:
 # `stock_value = quantity × price`
 # Also print the **total stock value** of all items.

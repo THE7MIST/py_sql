@@ -173,5 +173,3 @@ ADD COLUMN grade VARCHAR(10);
 TRUNCATE TABLE college_students;
 
 * Drop table
-
-

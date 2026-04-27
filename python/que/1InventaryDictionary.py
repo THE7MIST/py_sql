@@ -146,3 +146,118 @@ for item, (quantity, price) in inventory.items():
 # Keyboard Stock Value = ...
 # Monitor  Stock Value = ...
 # Total Stock Value = ...
+
+
+
+
+# Inventory Dictionary Program
+
+import re
+
+inventory = {
+    "Laptop": (10, 45000),
+    "Mouse": (85, 350),
+    "Keyboard": (40, 750),
+    "Monitor": (6, 12000)
+}
+
+# ---------------- a) Print all items ----------------
+print("\na) Inventory Details:")
+for item, (quantity, price) in inventory.items():
+    print(f"{item} => Quantity: {quantity}, Price: {price}")
+
+
+# ---------------- b) Stock value ----------------
+print("\nb) Stock Value Calculation:")
+total_stock_value = 0
+
+for item, (quantity, price) in inventory.items():
+    stock_value = quantity * price
+    print(f"{item} => Stock Value: {stock_value}")
+    total_stock_value += stock_value
+
+print(f"Total Stock Value: {total_stock_value}")
+
+
+# ---------------- c) Update item ----------------
+print("\nc) Update Item Quantity:")
+
+add_item = input("Item name: ").strip().title()
+add_qnt = int(input("New quantity: ").strip())
+
+found = False
+
+for item, (quantity, price) in inventory.items():
+    if add_item == item:
+        print(add_item, "found in inventory")
+        print("Old value:", inventory[add_item])
+
+        inventory[add_item] = (add_qnt, price)
+
+        print("Updated value:", inventory[add_item])
+        found = True
+        break
+
+if found == False:
+    print("Item not found")
+
+
+# ---------------- d) Stock status function ----------------
+def get_stock_status(quantity):
+    if quantity < 8:
+        return "Critical Stock"
+    elif quantity >= 8 and quantity <= 20:
+        return "Low Stock"
+    elif quantity >= 21 and quantity <= 50:
+        return "Adequate Stock"
+    else:
+        return "High Stock"
+
+
+print("\nd) Stock Status:")
+for item, (quantity, price) in inventory.items():
+    status = get_stock_status(quantity)
+    print(f"{item} => {status}")
+
+
+# ---------------- e) File handling + regex ----------------
+print("\ne) Writing report to file...")
+
+file = open("store_report.txt", "w")
+
+total_stock_value = 0
+
+for item, (quantity, price) in inventory.items():
+    stock_value = quantity * price
+    total_stock_value += stock_value
+    file.write(f"{item} Stock Value = {stock_value}\n")
+
+file.write(f"Total Stock Value = {total_stock_value}\n")
+file.close()
+
+
+# Read file and count lines & words
+file = open("store_report.txt", "r")
+content = file.readlines()
+
+line_count = len(content)
+word_count = 0
+
+for line in content:
+    word_count += len(line.split())
+
+file.close()
+
+print("Number of lines:", line_count)
+print("Number of words:", word_count)
+
+
+# Regex check for item names
+print("\nRegex Check (only letters and spaces):")
+pattern = r'^[A-Za-z ]+$'
+
+for item in inventory.keys():
+    if re.match(pattern, item):
+        print(item, "=> Valid")
+    else:
+        print(item, "=> Invalid")

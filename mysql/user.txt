@@ -1,0 +1,99 @@
+-- ============================================================
+-- MYSQL / MARIADB USER MANAGEMENT COMPLETE FLOW
+-- Covers: Create User → Grant → Check → Switch → Revoke → Drop
+-- ============================================================
+
+
+-- ================== 1. LOGIN (RUN IN TERMINAL) ==================
+-- mysql -u root -p
+
+
+-- ================== 2. CREATE USER ==================
+CREATE USER 'user1'@'localhost' IDENTIFIED BY 'pass123';
+
+-- Allow access from anywhere (optional)
+-- CREATE USER 'user1'@'%' IDENTIFIED BY 'pass123';
+
+
+-- ================== 3. VIEW USERS ==================
+SELECT user, host FROM mysql.user;
+
+
+-- ================== 4. CREATE DATABASE & TABLE ==================
+CREATE DATABASE mydb;
+
+USE mydb;
+
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    marks INT
+);
+
+INSERT INTO students VALUES
+(1, 'Amit', 85),
+(2, 'Neha', 90),
+(3, 'Raj', 78);
+
+
+-- ================== 5. GRANT PRIVILEGES ==================
+
+-- (A) Grant SELECT only
+GRANT SELECT ON mydb.students TO 'user1'@'localhost';
+
+-- (B) Grant multiple permissions
+GRANT SELECT, INSERT, UPDATE ON mydb.students TO 'user1'@'localhost';
+
+-- (C) Grant all privileges on database
+-- GRANT ALL PRIVILEGES ON mydb.* TO 'user1'@'localhost';
+
+-- (D) Grant full system access (use carefully)
+-- GRANT ALL PRIVILEGES ON *.* TO 'user1'@'localhost';
+
+
+-- ================== 6. APPLY CHANGES ==================
+FLUSH PRIVILEGES;
+
+
+-- ================== 7. CHECK PERMISSIONS ==================
+SHOW GRANTS FOR 'user1'@'localhost';
+
+
+-- ================== 8. SWITCH USER ==================
+-- (RUN IN TERMINAL, NOT SQL)
+-- EXIT;
+-- mysql -u user1 -p
+
+
+-- ================== 9. TEST PERMISSIONS ==================
+USE mydb;
+
+-- Should work if SELECT granted
+SELECT * FROM students;
+
+-- Works only if INSERT granted
+INSERT INTO students VALUES (4, 'Kiran', 88);
+
+-- Works only if UPDATE granted
+UPDATE students SET marks = 95 WHERE id = 1;
+
+
+-- ================== 10. REVOKE PRIVILEGES ==================
+REVOKE INSERT, UPDATE ON mydb.students FROM 'user1'@'localhost';
+
+
+-- ================== 11. REMOVE ALL PRIVILEGES ==================
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'user1'@'localhost';
+
+
+-- ================== 12. DELETE USER ==================
+DROP USER 'user1'@'localhost';
+
+
+-- ================== 13. FINAL CHECK ==================
+SELECT user, host FROM mysql.user;
+
+
+-- ============================================================
+-- END OF FILE
+-- ============================================================

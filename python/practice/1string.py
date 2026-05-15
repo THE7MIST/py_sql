@@ -15,9 +15,9 @@ print("Lowercase:", name.lower())
 print("Title Case:", name.title())  
 # Output: Aice Stack
 
-# Length of String
+# Length of String 
 print("Length:", len(name))  
-# Output: 10
+# Output: 10 
 
 # Finding Characters
 print("Find 'S':", name.find('S'))  
